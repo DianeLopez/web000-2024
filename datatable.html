@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appliance Statistics</title>
+<!-- Link ng Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body {
+    text-align: center; /* I-center ang lahat ng teksto */
+    font-family: Arial, sans-serif; /* Baguhin ang font */
+  }
+  .chart-container {
+    width: 800px; /* Baguhin ang laki ng chart container */
+    height: 600px; /* Baguhin ang taas ng chart container */
+    margin: 0 auto;
+  }
+</style>
+<script>
+// Simulang data para sa bawat kategorya ng appliances
+var appliances = {
+  "Rice Cooker": { 
+    "Wattage": 500,
+    "Time of Use": 1,
+    "Energy Cost": 5, // Sample energy cost for illustration
+    "Standby Power": 2, // Sample standby power for illustration
+    "Usage Patterns": [0, 0, 0, 1, 2, 3, 4, 4, 3, 2, 1, 0] // Sample usage pattern for illustration
+  },
+  "Electric Fan": { 
+    "Wattage": 1000,
+    "Time of Use": 2,
+    "Energy Cost": 8, // Sample energy cost for illustration
+    "Standby Power": 5, // Sample standby power for illustration
+    "Usage Patterns": [0, 0, 0, 0, 1, 2, 3, 4, 4, 3, 2, 1] // Sample usage pattern for illustration
+  },
+  "Blender": { 
+    "Wattage": 700,
+    "Time of Use": 1,
+    "Energy Cost": 6, // Sample energy cost for illustration
+    "Standby Power": 3, // Sample standby power for illustration
+    "Usage Patterns": [0, 0, 0, 0, 1, 2, 3, 4, 4, 3, 2, 1] // Sample usage pattern for illustration
+  },
+  "Kettle": { 
+    "Wattage": 1500,
+    "Time of Use": 1,
+    "Energy Cost": 10, // Sample energy cost for illustration
+    "Standby Power": 1, // Sample standby power for illustration
+    "Usage Patterns": [0, 0, 0, 1, 2, 3, 4, 4, 3, 2, 1, 0] // Sample usage pattern for illustration
+  },
+  "Dishwasher": { 
+    "Wattage": 1200,
+    "Time of Use": 3,
+    "Energy Cost": 12, // Sample energy cost for illustration
+    "Standby Power": 2, // Sample standby power for illustration
+    "Usage Patterns": [0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 4, 3] // Sample usage pattern for illustration
+  },
+  "Air Conditioner": { 
+    "Wattage": 2000,
+    "Time of Use": 6,
+    "Energy Cost": 20, // Sample energy cost for illustration
+    "Standby Power": 10, // Sample standby power for illustration
+    "Usage Patterns": [0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 6] // Sample usage pattern for illustration
+  },
+  "Vacuum Cleaner": { 
+    "Wattage": 800,
+    "Time of Use": 2,
+    "Energy Cost": 9, // Sample energy cost for illustration
+    "Standby Power": 3, // Sample standby power for illustration
+    "Usage Patterns": [0, 0, 0, 1, 2, 3, 4, 4, 3, 2, 1, 0] // Sample usage pattern for illustration
+  },
+  "Washing Machine": { 
+    "Wattage": 1500,
+    "Time of Use": 3,
+    "Energy Cost": 15, // Sample energy cost for illustration
+    "Standby Power": 2, // Sample standby power for illustration
+    "Usage Patterns": [0, 0, 0, 0, 1, 2, 3, 4, 4, 3, 2, 1] // Sample usage pattern for illustration
+  }
+};
+
+// Function para ipakita ang bar chart para sa bawat kategorya
+document.addEventListener("DOMContentLoaded", function() {
+  showChart('Wattage');
+  showChart('Time of Use');
+  showChart('Energy Cost');
+  showChart('Standby Power');
+  showChart('Usage Patterns');
+});
+
+function showChart(category) {
+  var ctx = document.getElementById(category.replace(/\s+/g, '').toLowerCase() + 'Chart').getContext('2d');
+  var labels = Object.keys(appliances);
+  var data = labels.map(label => appliances[label][category]);
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: category,
+        data: data,
+        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+</script>
+</head>
+<body>
+<h1>Appliance Statistics</h1>
+<div class="chart-container">
+  <canvas id="wattageChart"></canvas>
+  <canvas id="timeofuseChart"></canvas>
+  <canvas id="energycostChart"></canvas>
+  <canvas id="standbypowerChart"></canvas>
+  <canvas id="usagepatternsChart"></canvas>
+</div>
+</body>
+</html>
